@@ -12,6 +12,8 @@ const typeDefs = gql`
     setOutputVolume(val: Int!): Int
     setInputVolume(val: Int!): Int
     setBrightness(val: Float!): Float
+    sleepDisplay: Boolean
+    wakeDisplay: Boolean
   }
 `;
 
@@ -48,6 +50,14 @@ const resolvers = {
     setBrightness: async (_, { val }) => {
       await run(`brightness ${val}`);
       return val;
+    },
+    sleepDisplay: async () => {
+      await run("pmset displaysleepnow");
+      return true;
+    },
+    wakeDisplay: async () => {
+      await run("caffeinate -u -t 1");
+      return true;
     },
   },
 };

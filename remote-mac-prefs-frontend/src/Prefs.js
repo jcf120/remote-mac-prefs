@@ -27,6 +27,18 @@ const SET_BRIGHTNESS = gql`
   }
 `;
 
+const WAKE = gql`
+  mutation wakeDisplay {
+    wakeDisplay
+  }
+`;
+
+const SLEEP = gql`
+  mutation wakeDisplay {
+    sleepDisplay
+  }
+`;
+
 function debounce(f) {
   let task;
   return (...args) => {
@@ -44,7 +56,7 @@ export default function Prefs() {
     debounce((val) => setOutputVolume({ variables: { val } })),
     [setOutputVolume]
   );
-  const [setInputVolume] = useMutation(SET_OUT_VOLUME);
+  const [setInputVolume] = useMutation(SET_IN_VOLUME);
   const setInputVolumeDebounced = useCallback(
     debounce((val) => setInputVolume({ variables: { val } })),
     [setInputVolume]
@@ -54,6 +66,9 @@ export default function Prefs() {
     debounce((val) => setBrightness({ variables: { val } })),
     [setBrightness]
   );
+  const [wake] = useMutation(WAKE);
+  const [sleep] = useMutation(SLEEP);
+  if (!prefs) return <></>;
   return (
     <>
       <label>
@@ -87,6 +102,8 @@ export default function Prefs() {
         />
         Brightness
       </label>
+      <button onClick={wake}>Wake display</button>
+      <button onClick={sleep}>Sleep display</button>
     </>
   );
 }
