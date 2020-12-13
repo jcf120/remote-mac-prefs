@@ -57,7 +57,6 @@ export default function Prefs() {
   return (
     <>
       <label>
-        Output volume:
         <input
           type="range"
           min="0"
@@ -65,9 +64,9 @@ export default function Prefs() {
           defaultValue={prefs?.outputVolume}
           onChange={(e) => setOutputVolumeDebounced(Number(e.target.value))}
         />
+        Output volume
       </label>
       <label>
-        Input volume:
         <input
           type="range"
           min="0"
@@ -75,9 +74,9 @@ export default function Prefs() {
           defaultValue={prefs?.inputVolume}
           onChange={(e) => setInputVolumeDebounced(Number(e.target.value))}
         />
+        Input volume
       </label>
       <label>
-        Brightness:
         <input
           type="range"
           min="0"
@@ -86,6 +85,7 @@ export default function Prefs() {
           defaultValue={prefs?.brightness}
           onChange={(e) => setBrightnessDebounced(Number(e.target.value))}
         />
+        Brightness
       </label>
     </>
   );
